@@ -1,0 +1,46 @@
+1. 类加载时机  https://www.cnblogs.com/pfx1995/p/14723259.html
+
+2. gradle 仓库 https://jitpack.io/
+
+3. Android各种卡死黑屏系统稳定性问题Log抓取大荟萃 https://blog.csdn.net/weixin_39781326/article/details/111796509
+
+4. systrace https://www.cnblogs.com/blogs-of-lxl/p/10926824.html
+
+5. monkey 日志分析 https://www.cnblogs.com/wuzm/p/10965762.html
+
+6. 横向和纵向滑动的view https://blog.csdn.net/DeMonliuhui/article/details/91438066
+
+7. Java 并发编程 https://www.cnblogs.com/iou123lg/tag/JAVA%20%20%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/
+
+8. Sensor 架构 http://kernel.meizu.com/android-sensor-framework.html
+
+9. Android Sensor架构和原理分析 https://blog.csdn.net/haigand/article/details/93393320
+
+10. 操作系统修炼秘籍 https://www.junmajinlong.com/os/index/
+
+11. 高效删除大量小文件 https://www.junmajinlong.com/os/nice_renice_ionice/
+
+如果一个目录中包含了大量小文件。
+
+如果是删除目录中部分文件：
+(1).find /tmp/temp/ -type f -name “*.jpg” -print0 | xargs -0 -P4 -n20000 rm -rf
+(2).cd /tmp/temp/; perl -e ‘unlink for (<”*.jpg”>)’
+
+如果是删除目录中所有文件：
+(1).rm -rf /tmp/temp;mkdir -p /tmp/temp
+(2).mkdir /tmp/empty;rsync -r –delete /tmp/empty/ /tmp/temp/
+(3).cd /tmp/temp/; perl -e ‘unlink for (<”*“>)’
+
+12. 浏览器快速访问github http://liumengting.co/2021/10/31/github/
+
+13.1xx – Informational
+2xx – Successful
+3xx -Multiple Choice
+4xx– Client Error
+5xx -Server Error
+
+14. Compose体系 https://juejin.cn/post/7017811394036760612
+
+15. gradle 组件下载太慢 https://blog.csdn.net/qq_40067488/article/details/104896201
+
+16.从 github 上下载代码太慢的问题：https://www.zhihu.com/question/27159393

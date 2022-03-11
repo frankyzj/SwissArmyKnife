@@ -1,0 +1,9 @@
+1.  工作线程中，如果需要使用 Handler 来接收其他线程发过来的消息，需要在 Handler 初始化之前调用 Looper.prepare(); 
+	因为 handler 需要 Looper 去获取 MessageQueen，有了 MessageQueen 才能发送 Message。
+	
+2.  在 Looper.prepare() 中，会创建一个 Looper，并通过 ThreadLocal 的 set 方法，将这个 Looper 和当前线程进行“一一对应”。
+
+3.  在 Looper 的构造方法中会创建一个 MessageQueen。
+
+4.  每个线程都持有一个 ThreadLocalMap。ThreadLocalMap 在 ThreadLocal 的 set 方法第一次被调用时创建。
+	ThreadLocalMap 以 ThreadLocal 为 key，以 Looper 为 value。
