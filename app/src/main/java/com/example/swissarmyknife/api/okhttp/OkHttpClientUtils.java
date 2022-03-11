@@ -1,4 +1,4 @@
-package com.example.swissarmyknife.api;
+package com.example.swissarmyknife.api.okhttp;
 
 import java.io.IOException;
 

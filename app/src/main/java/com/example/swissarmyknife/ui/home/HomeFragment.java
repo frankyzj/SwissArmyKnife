@@ -1,21 +1,22 @@
 package com.example.swissarmyknife.ui.home;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.swissarmyknife.R;
-import com.example.swissarmyknife.customview.WindowUtils;
 
 public class HomeFragment extends Fragment {
+    private static final String TAG = "HomeFragment";
 
     private HomeViewModel homeViewModel;
 
@@ -24,17 +25,21 @@ public class HomeFragment extends Fragment {
         homeViewModel =
                 new ViewModelProvider(this).get(HomeViewModel.class);
         View root = inflater.inflate(R.layout.fragment_home, container, false);
-        final TextView textView = root.findViewById(R.id.text_home);
-        homeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });
-        WindowUtils windowUtils = new WindowUtils(getActivity());
-        textView.setOnClickListener(v -> {
-            windowUtils.showView();
+        root.setOnClickListener(v -> Log.i(TAG, "onCreateView: "));
+
+        final RecyclerView recyclerView = root.findViewById(R.id.features_items);
+        FeatureItemAdapter adapter = new FeatureItemAdapter(getActivity());
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        homeViewModel.getItems().observe(getViewLifecycleOwner(), s -> {
+            adapter.setItems(s);
+            adapter.notifyDataSetChanged();
         });
         return root;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
     }
 }
